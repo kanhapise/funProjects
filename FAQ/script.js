@@ -55,5 +55,60 @@ function createFAQEl(data) {
 
   questionCont.appendChild(questionEl);
   questionCont.appendChild(iconEl);
-  
+
+  //   Answer Cont
+
+  const answerCont = document.createElement("div");
+  answerCont.classList.add("answerCont");
+  const answerEl = document.createElement("div");
+  answerEl.classList.add("answer");
+  const answerPara = document.createElement("p");
+  answerPara.innerHTML = data.answer;
+
+  answerEl.appendChild(answerPara);
+  answerCont.appendChild(answerEl);
+  faqEl.appendChild(answerCont);
+
+  faqContEl.appendChild(faqEl);
+
+  // Event listener
+
+  questionCont.addEventListener("click", (e) => {
+    const allFaq = document.querySelectorAll(".faqCont .faq");
+    allFaq.forEach((item) =>
+      item !== faqEl ? item.classList.remove("active") : false
+    );
+
+    faqEl.classList.toggle("active");
+
+    createRipple(e);
+  });
+
+  // Ripple Effect
+
+  function createRipple(pos) {
+    let topPos = pos.clientY - faqEl.getBoundingClientRect().top;
+
+    let leftPos = pos.clientX - faqEl.getBoundingClientRect().left;
+
+    const spanEl = document.createElement("span");
+    spanEl.classList.add("ripple");
+    questionCont.appendChild(spanEl);
+    spanEl.style.cssText = `height:1000px;
+        width:1000px;background-color:#647dee33;
+        position:absolute;transform:translate(-50%,-50%);border-radius:50%;opacity:1;
+        animation:rippleEffect 1s ease-in-out;
+        top:${topPos}px;
+        left:${leftPos}px;
+        opacity:0;
+        `;
+
+    spanEl.addEventListener("animationend", (e) => {
+      spanEl.remove();
+    });
+  }
 }
+
+FAQQuestion.forEach((question) => {
+  createFAQEl(question);
+});
