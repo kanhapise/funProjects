@@ -51,3 +51,66 @@ function addO() {
 function updateCell(cell, currentClass) {
   cell.classList.add(currentClass);
 }
+
+function getOPositon() {
+  const xWinningCombinations = WINNING_COMBINATIONS.filter(
+    (column) =>
+      xPositions.some((i) => column.includes(i)) &&
+      !column.some((i) => cellsEl[i].classList.contains(CLASS_CIRCLE))
+  );
+
+  const emptyCells = WINNING_COMBINATIONS.filter((i) =>
+    i.some((v) => !cellsEl[v].classList.contains(CLASS_CIRCLE))
+  );
+
+  const xPositionArr = xWinningCombinations
+    .map((column) =>
+      column.filter((i) => !cellsEl[i].classList.contains(CLASS_X))
+    )
+    .sort((a, b) => a.length - b.length);
+
+  const position = xPositionArr[0]?.[getRandomNumber(xPositionArr[0]?.length)];
+
+  if (!position && position !== 0) showGameModal(`draw`);
+
+  return position;
+}
+
+function checkWin(currentClass) {
+  return WINNING_COMBINATIONS.some((column) =>
+    column.every((i) => cellsEl[i].classList.contains(currentClass))
+  );
+}
+
+function stopGame() {
+  cellsEl.forEach((cell) => cell.removeEventListener("click", handleClick));
+  boardEl.classList.add("game-end");
+}
+
+function showGameModal(gameStatus) {
+  const gameStatusTitle = gameStatusEl.querySelector(".game-status-title");
+  const restartBtn = gameStatusEl.querySelector(".btn-primary");
+
+  const gameStatues = {
+    won: { className: "won", text: "You Won!" },
+    lost: { className: "lost", text: "Oops! You Lost" },
+    draw: { className: "draw", text: "It's a draw" },
+  };
+
+  const {
+    [gameStatus]: { className, text },
+  } = gameStatues;
+
+  gameStatusEl.classList.add(className);
+  gameStatusEl.style.display = "flex";
+  gameStatusTitle.textContent = text;
+  stopGame();
+
+  restartBtn.addEventListener("click", () => window.location.reload());
+}
+
+// Helper functions
+
+function getRandomNumber(limit) {
+  return Math.floor(Math.random() * limit);
+}
