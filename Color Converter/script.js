@@ -91,6 +91,78 @@ class ColorConvertor {
     this.convert(value);
     this.inputEl.value = value;
   }
+
+  // HSL to RGB AND HEX
+
+  getHslToHexCode(arr) {
+    const rgb = this.hslToRgb(arr);
+    let alpha = null;
+    if (rgb.length === 4) {
+      alpha = Math.round(rgb[3] * 255).toString(16);
+      rgb.pop();
+    }
+
+    const hexColor = rgb
+      .map((item) => {
+        const hex = item.toString(16);
+        return hex.length === 1 ? `0${hex}` : hex;
+      })
+      .join("");
+
+    return `#${hexColor}${alpha ? alpha : ""}`;
+  }
+
+  getHslToRgbCode(arr) {
+    const rgb = this.hslToRgb(arr);
+    let alpha = null;
+    if (rgb.length === 4) alpha = rgb[rgb.length - 1];
+
+    return `rgb${alpha ? "a" : ""}(${rgb[0]}, ${rgb[1]}, ${rgb[2]}${
+      alpha ? `, ${alpha}` : ``
+    })`;
+  }
+
+  hslToRgb(arr) {
+    let h = arr[0];
+    let s = arr[1];
+    let l = arr[2];
+    let a = null;
+    if (arr.length === 4) {
+      a = arr[arr.length - 1];
+    }
+
+    h /= 360;
+    s /= 100;
+    l /= 100;
+
+    let r = null;
+    let g = null;
+    let b = null;
+
+    if (s === 0) r = g = b = l;
+    else {
+      function hueToRgb(p, q, t) {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      }
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hueToRgb(p, q, h + 1 / 3);
+      g = hueToRgb(p, q, h);
+      b = hueToRgb(p, q, h - 1 / 3);
+    }
+
+    let res = [r, g, b].map((item) => Math.round(item * 255));
+
+    if (a) res.push(a * 1);
+
+    return res;
+  }
+
 }
 
 const colorConatiner = document.getElementById("container");
