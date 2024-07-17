@@ -229,6 +229,77 @@ class ColorConvertor {
     })`;
   }
 
+  // RGB to HEX AND HSL
+
+  getRgbToHex(arr) {
+    let alpha = null;
+
+    if (arr.length === 4) {
+      alpha = arr[arr.length - 1];
+      alpha = Math.round(arr[3] * 255).toString(16);
+      arr = arr.slice(0, 3);
+    }
+
+    let res = arr
+      .map((item) => {
+        let hexCode = parseInt(item).toString(16);
+        return hexCode.length === 1 ? `0${hexCode}` : hexCode;
+      })
+      .join("");
+
+    return `#${res}${alpha ? alpha : ""}`;
+  }
+
+  getRgbToHsl(arr) {
+    let alpha = null;
+    if (arr.length === 4) {
+      alpha = arr[arr.length - 1];
+      arr = arr.slice(0, 3);
+    }
+
+    let r = arr[0] / 255;
+    let g = arr[1] / 255;
+    let b = arr[2] / 255;
+
+    let max = Math.max(r, g, b);
+    let min = Math.min(r, g, b);
+    let delta = max - min;
+
+    let h = null;
+    let s = null;
+    let l = null;
+
+    if (delta === 0) h = 0;
+    else if (max === r) h = ((g - b) / delta) % 6;
+    else if (max === g) h = (b - r) / delta + 2;
+    else h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0) h += 360;
+
+    l = (max + min) / 2;
+    s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    l = Math.round(l * 100);
+    s = Math.round(s * 100);
+
+    return `hsl${alpha ? "a" : ""}(${h}, ${s}, ${l}${
+      alpha ? `, ${alpha}` : ""
+    })`;
+  }
+
+  // Copy Color
+
+  copyColor(e) {
+    let target = e.target;
+
+    let value = target.previousElementSibling.innerHTML;
+    target.dataset.tooltip = "Copied";
+    this.addEventListener("mouseleave", () => (this.dataset.tooltip = `Copy`));
+
+    window.navigator.clipboard.writeText(value);
+  }
 }
 
 const colorConatiner = document.getElementById("container");
