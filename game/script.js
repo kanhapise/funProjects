@@ -144,6 +144,52 @@ function moveBall() {
       }
     });
   });
+  // game over
+  if (ball.y + ball.size > canvas.height) {
+    showAllBricks();
+    score = 0;
+  }
+}
+
+function increaseScore() {
+  score++;
+  if (score % (brickRowCount * brickRowCount) === 0) {
+    // no remainder
+    showAllBricks();
+  }
+}
+
+function showAllBricks() {
+  bricks.forEach((column) => {
+    column.forEach((brick) => (brick.visible = true));
+  });
+}
+
+// Handle Key Events
+function keyDown(e) {
+  if (e.key === "Right" || e.key === "ArrowRight") paddle.dx = paddle.speed;
+  else if (e.key === "Left" || e.key === "ArrowLeft") paddle.dx = -paddle.speed;
+}
+
+function keyUp(e) {
+  if (
+    e.key === "Right" ||
+    e.key === "ArrowRight" ||
+    e.key === "Left" ||
+    e.key === "ArrowLeft"
+  ) {
+    paddle.dx = 0;
+  }
+}
+
+// Update Canvas
+function update() {
+  // update
+  movePaddle();
+  moveBall();
+  // draw
+  draw();
+  requestAnimationFrame(update);
 }
 
 // Event Listeners
@@ -152,3 +198,5 @@ document.addEventListener("keyup", keyUp);
 rulesButton.addEventListener("click", () => rules.classList.add("show"));
 closeButton.addEventListener("click", () => rules.classList.remove("show"));
 
+// Init
+update();
