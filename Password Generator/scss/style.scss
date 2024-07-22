@@ -84,6 +84,78 @@ body .container {
 // Main
 
 body .container {
+  main {
+    margin-top: 2rem;
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    > div:not(.sliderWrapper) {
+      input {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+      }
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .toggle {
+        height: 1.2rem;
+        width: 2.5rem;
+        background-color: #ccc;
+        border-radius: 9rem;
+        cursor: pointer;
+        transition: 300ms ease;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          height: 0.9rem;
+          width: 0.9rem;
+          border-radius: 9rem;
+          background-color: #fff;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 8%;
+          transition: 300ms ease;
+        }
+      }
+      input:checked + .toggle::after {
+        left: 56%;
+        background-color: #fff;
+      }
+      input:checked + .toggle {
+        background-color: #2196f3;
+      }
+
+      label {
+        cursor: pointer;
+        user-select: none;
+        font-size: 1rem;
+      }
+    }
+    .sliderWrapper {
+      width: 100%;
+      .topWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      input {
+        width: 100%;
+        appearance: none;
+        height: 0.3rem;
+        background: #d3d3d3;
+        border-radius: 1rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: 300ms ease;
+        margin-top: 0.5rem;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
   > button {
     width: 100%;
     padding: 0.8em;
