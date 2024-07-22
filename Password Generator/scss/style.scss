@@ -40,5 +40,64 @@ body .container {
     background: #d3d3d3;
     border-radius: 0.25rem;
     padding-left: 1rem;
+    button {
+      padding: 0.8rem;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      background-color: #4f5d75;
+      color: #bfc0c0;
+      position: relative;
+      i {
+        transition: 200ms ease;
+      }
+      &::before {
+        display: none;
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: #4f5d75;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        top: -93%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      &:hover {
+        i {
+          transform: scale(1.1);
+        }
+
+        &::before {
+          display: flex;
+        }
+      }
+      &:active {
+        i {
+          transform: scale(0.93);
+        }
+      }
+    }
+  }
+}
+
+// Main
+
+body .container {
+  > button {
+    width: 100%;
+    padding: 0.8em;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: #2196f3;
+    color: #fff;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: 300ms ease opacity;
+    &:hover {
+      opacity: 0.75;
+    }
   }
 }
