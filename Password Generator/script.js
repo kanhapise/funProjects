@@ -32,3 +32,48 @@ function generatePassword() {
 
   passwordViewEl.innerHTML = getPassword(requiredField);
 }
+
+function getPassword(arr) {
+  let password = "";
+  console.log(arr);
+  for (let i = 0; i < passwordLength; i++) {
+    password += arr[Math.floor(Math.random() * arr.length)]();
+  }
+  return password;
+}
+
+function copyPassword() {
+  this.dataset.tooltip = `Copied`;
+  this.addEventListener("mouseleave", () => (this.dataset.tooltip = `Copy`));
+
+  window.navigator.clipboard.writeText(passwordViewEl.textContent);
+}
+
+function generateRandomLowerCase() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+}
+
+function generateRandomUpperCase() {
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+}
+
+function generateRandomNumber() {
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+
+function generateRandomSymbol() {
+  let symbols = "!@#$%^&*()_+/*-~";
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+
+
+const allCheckBox = [upperEl, lowerEl, symbolEl];
+
+allCheckBox.forEach(function (checkbox) {
+  checkbox.addEventListener("click", function (e) {
+    const isAllUnchecked = allCheckBox.every((chkbox) => !chkbox.checked);
+    const lastChecked = this;
+    if (isAllUnchecked) checkSomething(lastChecked);
+  });
+});
