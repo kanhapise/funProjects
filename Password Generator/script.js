@@ -67,7 +67,6 @@ function generateRandomSymbol() {
 }
 
 
-
 const allCheckBox = [upperEl, lowerEl, symbolEl];
 
 allCheckBox.forEach(function (checkbox) {
@@ -77,3 +76,12 @@ allCheckBox.forEach(function (checkbox) {
     if (isAllUnchecked) checkSomething(lastChecked);
   });
 });
+
+function checkSomething(lastChecked) {
+  const randomCheck =
+    allCheckBox[Math.floor(Math.random() * allCheckBox.length)];
+
+  if (lastChecked === randomCheck) {
+    return checkSomething(lastChecked);
+  } else randomCheck.checked = true;
+}
