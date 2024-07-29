@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,800;1,700&display=swap");
+
+* {
+  margin: 0%;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Overpass", sans-serif;
+}
+body section {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background-color: #f0f8ff;
+  padding-top: 2rem;
+}
+body section .container {
+  padding: 2.5rem;
+  padding-top: 0rem;
+  padding-bottom: 1.5rem;
+  border-radius: 0.8rem;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 500px;
+}
+body section .container header {
+  padding: 2.2rem;
+  text-align: center;
+}
+body section .container header h1 {
+  color: #3c4043;
+  font-size: 1.8rem;
+  color: #6099f0;
+}
+body section .container header p {
+  color: #858a92;
+  font-size: 1rem;
+}
+body section .container .dropArea {
+  border: 2px dashed #c2d9f9;
+  border-radius: 0.5rem;
+  width: 100%;
+  position: relative;
+  transition: 0.3s ease;
+  transition-property: background-color, border;
+  user-select: none;
+}
