@@ -104,3 +104,55 @@ body section .container .uploadedFileCont .uploadedFile {
   user-select: none;
   margin: 10px 0;
 }
+body section .container .uploadedFileCont .uploadedFile .fileName p {
+  color: #468bf5;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+body section .container .uploadedFileCont .uploadedFile .fileName span {
+  font-size: 12px;
+  color: #858a92;
+  margin-left: 5px;
+}
+body section .container .uploadedFileCont .uploadedFile .closeBtn {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body section .container .uploadedFileCont .uploadedFile .closeBtn ion-icon {
+  color: #dc3545;
+  font-size: 20px;
+}
+body section .container .uploadBtnCont {
+  width: 100%;
+  margin-top: 10px;
+  display: none;
+}
+body section .container .uploadBtn {
+  border: none;
+  outline: none;
+  background-color: #468bf5;
+  color: #fff;
+  padding: 0.45rem 1.2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1.5;
+  float: right;
+  text-align: right;
+}
+body section .container .uploadBtnCont.content-here {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 450px) {
+  body section .container header h1 {
+    font-size: 1.4rem;
+  }
+  body section .container header p {
+    font-size: 1rem;
+  }
+}
