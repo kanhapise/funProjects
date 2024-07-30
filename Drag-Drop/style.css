@@ -10,7 +10,7 @@ body section {
   display: grid;
   place-items: center;
   min-height: 100vh;
-  background-color: #f0f8ff;
+  background-color: #002c52;
   padding-top: 2rem;
 }
 body section .container {
@@ -105,7 +105,7 @@ body section .container .uploadedFileCont .uploadedFile {
   margin: 10px 0;
 }
 body section .container .uploadedFileCont .uploadedFile .fileName p {
-  color: #468bf5;
+  color: #0f3a7c;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -133,7 +133,7 @@ body section .container .uploadBtnCont {
 body section .container .uploadBtn {
   border: none;
   outline: none;
-  background-color: #468bf5;
+  background-color: #830606;
   color: #fff;
   padding: 0.45rem 1.2rem;
   border-radius: 0.25rem;
